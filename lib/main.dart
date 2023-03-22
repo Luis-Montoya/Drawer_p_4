@@ -4,7 +4,7 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  static const String _title = 'Flores Drawer';
+  static const String _title = 'Montoya Drawer';
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
