@@ -1,98 +1,130 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  static const String _title = 'Draw Luis Montoya';
+  static const String _title = 'Flores Drawer';
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
-      home: const MyHomePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.blueGrey,
+      ),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+  // This class is the configuration for the state.
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Drawer Montoya',
+        key: _key,
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('Drawer Montoya'),
+          backgroundColor: const Color(0xff58c181),
         ),
-        backgroundColor: const Color(0xff4ab8bc),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Color(0xff4caad5)),
-              accountName: Text(
-                "Luis Montoya",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
+        drawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              const UserAccountsDrawerHeader(
+                // <-- SEE HERE
+                decoration: BoxDecoration(color: const Color(0xff77ebef)),
+                accountName: Text(
+                  "LUIS Montoya",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                accountEmail: Text(
+                  "A.20308051280@cbtis128.edu.mx",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                currentAccountPicture: FlutterLogo(),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.home,
+                ),
+                title: const Text('Pagina 1'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.train,
+                ),
+                title: const Text('Pagina 2'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.access_alarm,
+                ),
+                title: const Text('Pagina 3'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              AboutListTile(
+                // <-- SEE HERE
+                icon: Icon(
+                  Icons.info,
+                ),
+                child: Text('About app'),
+                applicationIcon: Icon(
+                  Icons.local_play,
+                ),
+                applicationName: 'My Cool App',
+                applicationVersion: '1.0.25',
+                applicationLegalese: '© 2019 Company',
+                aboutBoxChildren: [
+                  ///Content goes here...
+                ],
+              ),
+            ],
+          ),
+        ),
+        body: Center(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 50,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  _key.currentState!.openDrawer(); //<-- SEE HERE
+                },
+                child: const Text(
+                  'Elevated Button 1',
+                  style: TextStyle(fontSize: 24),
                 ),
               ),
-              accountEmail: Text(
-                "a.20308051280631@cbtis128.edu.mx",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              currentAccountPicture: FlutterLogo(),
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.ac_unit,
-              ),
-              title: const Text('Page 1'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.account_balance,
-              ),
-              title: const Text('Page 2'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.add_alarm_sharp,
-              ),
-              title: const Text('Page 3'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            )
-          ],
-        ),
-      ),
-      body: Center(
-        child: Column(
-          children: const [
-            SizedBox(
-              height: 50,
-            ),
-          ],
-        ),
-      ),
-    );
+            ],
+          ),
+        ));
   }
 }
